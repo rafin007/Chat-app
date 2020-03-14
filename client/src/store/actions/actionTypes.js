@@ -1,0 +1,1 @@
+export const JOIN_USER = 'JOIN_USER';
