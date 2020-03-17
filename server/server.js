@@ -7,7 +7,7 @@ const { addUser, removeUser, getUser, getAllUsersOfRoom } = require('./userHelpe
 //basic setup
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
+const io = socketio(server, { wsEngine: 'ws' });
 
 const PORT = process.env.PORT || 5000;
 
@@ -19,10 +19,16 @@ io.on('connection', (socket) => {
     //server generated messages
     socket.on('join', ({ name, room }, callback) => {
         //add the user
+        if (!name || !room) {
+            return;
+        }
+        // console.log(name);
+
         const { error, user } = addUser({ id: socket.id, name, room });
 
         //if error throw them
         if (error) {
+            console.log(error);
             return callback(error);
         }
 
@@ -50,10 +56,12 @@ io.on('connection', (socket) => {
     });
 
     socket.on('disconnect', () => {
-        console.log('user has left');
+        const user = getUser(socket.id);
+        if (!user) return;
+        io.to(user.room).emit('message', { user: 'admin', text: `${user.name} has left the chat` });
+        removeUser(socket.id);
     });
 });
-
 
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

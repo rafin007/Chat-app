@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import '../index.scss';
@@ -10,6 +10,8 @@ const Join = props => {
     const [name, setName] = useState('');
     const [room, setRoom] = useState('');
 
+    const [error, setError] = useState('')
+
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -19,6 +21,10 @@ const Join = props => {
             history.push('/chat');
         }
     };
+
+    useEffect(() => {
+        setError(props.location.state);
+    }, [props.location.state]);
 
     return (
         <div className="valign-wrapper form blue-grey darken-4" >
@@ -44,6 +50,7 @@ const Join = props => {
                                         </div>
                                     </form>
                                 </div>
+                                <p className="red-text" >{error}</p>
                                 <div className="card-action">
                                     <div className="button-div">
                                         <button to="/chat" className="btn black-text blue-grey lighten-5" onClick={submitForm} >Join</button>
