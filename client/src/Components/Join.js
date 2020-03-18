@@ -49,8 +49,8 @@ const Join = props => {
                                             </div>
                                         </div>
                                     </form>
+                                    <p className="errorMessage center-align flow-text" >{error}</p>
                                 </div>
-                                <p className="red-text" >{error}</p>
                                 <div className="card-action">
                                     <div className="button-div">
                                         <button to="/chat" className="btn black-text blue-grey lighten-5" onClick={submitForm} >Join</button>

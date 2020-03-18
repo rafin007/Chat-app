@@ -8,7 +8,7 @@ const addUser = ({ id, room, name }) => {
     const existingUser = users.find(user => user.room === room && user.name === name);
 
     if (existingUser) {
-        return { error: 'Name already taken' };
+        return { error: 'Sorry, this name is already taken' };
     }
 
     const user = { id, name, room };

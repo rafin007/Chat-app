@@ -4,7 +4,7 @@
 
 .write-message {
     position: fixed;
-    bottom: 3rem;
+    bottom: 2.5rem;
     right: 0;
 }
 
@@ -12,17 +12,17 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    height: calc(100vh - 15rem);
+    height: calc(100vh - 18rem);
 }
 
 .scroller {
-    height: calc(100vh - 15rem);
+    height: calc(100vh - 18rem);
     width: auto;
 }
 
 .send-button {
     position: fixed;
-    bottom: 4.5rem;
+    bottom: 4rem;
     right: 0 !important;
 }
 
@@ -59,25 +59,18 @@
 
 .room-name {
     height: 2.5rem;
-    padding-top: .4rem;
+    padding: .4rem 1rem 0 1rem;
     border-bottom: 1px solid #fff;
+    display: flex;
+    justify-content: space-between;
+
+    .room {
+        letter-spacing: .5rem;
+    }
 }
 
 .message {
     // margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    animation: messageAppear .3s ease-in;
-}
-
-@keyframes messageApppear {
-    0% {
-        opacity: 0;
-        transform: translateY(-3rem);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }

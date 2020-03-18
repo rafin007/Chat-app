@@ -8,7 +8,6 @@ import RoomInfo from '../Components/RoomInfo';
 import Messages from '../Components/Messages';
 import WriteMessage from '../Components/WriteMessage';
 
-
 import '../index.scss';
 
 //create forceUpdate hook
@@ -24,6 +23,8 @@ const Chat = props => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
+    const [users, setUsers] = useState([]);
+
     const history = useHistory();
 
     const forceUpdate = useForceUpdate();
@@ -37,6 +38,7 @@ const Chat = props => {
     }
 
     const ENDPOINT = 'http://localhost:5000';
+    // const ENDPOINT = 'http://192.168.0.107:5000';
 
     //get connection
     useEffect(() => {
@@ -67,9 +69,30 @@ const Chat = props => {
         });
     }, [messages, socket]);
 
+    //roomInfo
+    useEffect(() => {
+        socket.current.on('roomData', ({ users }) => {
+            setUsers(users);
+        });
+    });
+
+    // // send server that user is typing
+    // useEffect(() => {
+    //     if (message) {
+    //         socket.current.emit('typing');
+    //     }
+    // }, [message]);
+
+    // // receive from server who is typing
+    // const [typing, setTyping] = useState('');
+    // useEffect(() => {
+    //     socket.current.on('userTyping', ({ text }) => {
+    //         setTyping(text);
+    //     });
+    // }, [message, socket.current]);
+
     //send message
     const sendMessage = () => {
-
         if (message) {
             socket.current.emit('sendMessage', message, () => {
                 setMessage('');
@@ -77,12 +100,12 @@ const Chat = props => {
         }
     }
 
-    // console.log(message, messages);
+    // console.log(typing);
 
     return (
         <div className="chat-container blue-grey darken-4">
             {redirect}
-            <RoomInfo room={user.room} />
+            <RoomInfo room={user.room} users={users} />
             <div className="container">
                 <div className="row row-element">
                     <Messages messages={messages} user={user.name} />

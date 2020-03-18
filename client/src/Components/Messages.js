@@ -1,6 +1,6 @@
 import React from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
-import moment from 'moment';
+import ReactEmoji from 'react-emoji';
 import '../index.scss';
 
 import MessageSender from './MessageSender';
@@ -8,14 +8,13 @@ import MessageReceiver from './MessageReceiver';
 
 const Messages = props => {
 
-    const date = new Date();
-    const timestamp = moment(date).format('ddd h:mm A');
+    // console.log(props.user);
 
     return (
         <div className="messages">
             <ScrollToBottom className="scroller">
                 {/* check who sent the message */}
-                {props.messages.map((message, i) => props.user === message.user ? <MessageSender time={timestamp} message={message.text} key={i} sender={message.user} /> : <MessageReceiver time={timestamp} message={message.text} key={i} sender={message.user} />)}
+                {props.messages.map((message, i) => props.user === message.user ? <MessageSender time={message.timestamp} message={ReactEmoji.emojify(message.text)} key={i} sender={message.user} /> : <MessageReceiver time={message.timestamp} message={ReactEmoji.emojify(message.text)} key={i} sender={message.user} />)}
             </ScrollToBottom>
         </div>
     );
