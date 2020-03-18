@@ -57,6 +57,7 @@ const Join = props => {
                                     </div>
                                 </div>
                             </div>
+                            <p className="credit-text center-align grey-text">Created by Arefin Mehedi</p>
                         </div>
                     </div>
                 </div>

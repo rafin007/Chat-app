@@ -37,8 +37,8 @@ const Chat = props => {
         redirect = <Redirect to="/" />;
     }
 
-    const ENDPOINT = 'http://localhost:5000';
-    // const ENDPOINT = 'http://192.168.0.107:5000';
+    // const ENDPOINT = 'http://localhost:5000';
+    const ENDPOINT = 'https://react-chat-app999.herokuapp.com/';
 
     //get connection
     useEffect(() => {

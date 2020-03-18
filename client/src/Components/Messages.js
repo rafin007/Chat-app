@@ -14,7 +14,7 @@ const Messages = props => {
         <div className="messages">
             <ScrollToBottom className="scroller">
                 {/* check who sent the message */}
-                {props.messages.map((message, i) => props.user === message.user ? <MessageSender time={message.timestamp} message={ReactEmoji.emojify(message.text)} key={i} sender={message.user} /> : <MessageReceiver time={message.timestamp} message={ReactEmoji.emojify(message.text)} key={i} sender={message.user} />)}
+                {props.messages.map((message, i) => props.user.toLowerCase() === message.user ? <MessageSender time={message.timestamp} message={ReactEmoji.emojify(message.text)} key={i} sender={message.user} /> : <MessageReceiver time={message.timestamp} message={ReactEmoji.emojify(message.text)} key={i} sender={message.user} />)}
             </ScrollToBottom>
         </div>
     );
