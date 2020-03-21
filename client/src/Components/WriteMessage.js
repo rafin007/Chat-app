@@ -26,10 +26,10 @@ const WriteMessage = props => {
     return (
         <Fragment>
             {/* <p className="white-text" >{props.typing !== '' ? props.typing : null}</p> */}
-            <div className="input-field col s9 write-message">
-                <textarea placeholder="Write message..." type="text" className="white-text materialize-textarea" onChange={(event) => props.setMessage(event.target.value)} value={props.message} onKeyPress={(event) => event.key === "Enter" && props.sendMessage()} />
+            <div className="input-field col s9 m8 l7 write-message">
+                <textarea placeholder="Write message..." type="text" className="white-text materialize-textarea" onChange={(event) => props.setMessage(event.target.value)} value={props.message} onKeyPress={(event) => event.key === "Enter" ? props.sendMessage() : null} />
             </div>
-            <div className="col s2 send-button" onClick={props.sendMessage}>
+            <div className="col s2 m3 l3 send-button" onClick={props.sendMessage}>
                 <i className="material-icons white-text small">send</i>
             </div>
         </Fragment>
